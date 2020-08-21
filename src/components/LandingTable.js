@@ -6,6 +6,7 @@ import './style.css';
 import { Table, Navbar } from 'react-bootstrap'
 import Row from './Row'
 
+
 export class LandingTable extends React.Component {
 
   componentDidMount() {
@@ -20,11 +21,15 @@ export class LandingTable extends React.Component {
     let setDataArray = [];
     let getRowData = {};
     let meteoriteValue = meteorSpecification;
-    console.log("The Coordinates Values Is--->");
+    console.log("The Coordinates Values Is--->", meteoriteValue);
 
-    for (const item of Object.entries(meteoriteValue)) {
+    for (const item of Object.entries(meteoriteValue).slice(0, 15)) {
       setDataArray.push(item)
     }
+
+    // for (const item of Object.entries(meteoriteValue)) {
+    //   setDataArray.push(item)
+    // }
     return setDataArray.map((row, index) => {
       return <Row data={ row[1] } key={ row[0] } />;
     })
@@ -36,7 +41,7 @@ export class LandingTable extends React.Component {
     return (
       <div>
         {/*this.getTableContent(this.props.Meteorites)*/ }
-        <Navbar>
+        <Navbar className="tableHeading">
           Meteorite Landing
         </Navbar>
         <Table className="table" >

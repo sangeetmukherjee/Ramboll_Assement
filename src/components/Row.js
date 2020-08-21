@@ -1,33 +1,35 @@
 import React, { PureComponent } from "react";
-//import {Glyphicon} from 'react-bootstrap'
-// import mapboxgl from 'mapbox-gl';
-// import 'mapbox-gl/dist/mapbox-gl.css';
+import { Glyphicon } from 'react-bootstrap'
+import Map from './Map';
+
 
 export default class Row extends PureComponent {
-
-	// componentDidMount() {
-  
-	// 	const map = new mapboxgl.Map({
-	// 	  container: this.mapWrapper,
-	// 	  style: 'mapbox://styles/mapbox/streets-v10',
-	//	  center: [xCoordinates, yCoordinates],
-	// 	  center: [-73.985664, 40.748514],
-	// 	  zoom: 12
-	// 	});
-	// }
-
 	constructor (props) {
 		super(props);
 	}
 
+
 	render() {
+		var fullYear = (this.props.data.year).split("T")[0];
 		if (this.props.data && this.props.data.geolocation) {
 			if (this.props.data.geolocation.coordinates) {
 				var xCoordinates = this.props.data.geolocation.coordinates[0]
 				var yCoordinates = this.props.data.geolocation.coordinates[1]
+				return (
+					<tr>
+						<td>{ this.props.data.id }</td>
+						<td>{ this.props.data.name }</td>
+						<td>{ this.props.data.recclass }</td>
+						<td>{ this.props.data.mass }</td>
+						<td>{ this.props.data.fall }</td>
+						<td>{ fullYear }</td>
+						<td>{ xCoordinates }</td>
+						<td>{ yCoordinates }</td>
+						<td>{ <Map xCoordinates={ xCoordinates } yCoordinates={ yCoordinates } /> }</td>
+					</tr>
+				);
 			}
 		}
-
 		return (
 			<tr>
 				<td>{ this.props.data.id }</td>
@@ -35,13 +37,8 @@ export default class Row extends PureComponent {
 				<td>{ this.props.data.recclass }</td>
 				<td>{ this.props.data.mass }</td>
 				<td>{ this.props.data.fall }</td>
-				<td>{ this.props.data.year }</td>
-				<td>{ xCoordinates }</td>
-				<td>{ yCoordinates }</td>
+				<td>{ fullYear }</td>
 			</tr>
 		);
-
-
-
 	}
 }
